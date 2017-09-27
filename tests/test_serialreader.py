@@ -12,7 +12,7 @@ class TestSerialReader(unittest.TestCase):
         self.reader = serialreader.SerialReader(None, 9600, self.store, 20)
         self.reader.device_name = "loop://"
         self.reader.device = serial.serial_for_url("loop://", timeout=5)
-        self.test_json = ' \n\n[ \n  {"name":"light_value","value":"777"} \n] \n'
+        self.test_json = ' \n\n[ \n  {"id":"light_value","value":"777"} \n] \n'
 
     def test_timeout(self):
         # we can not really test the actual timeout of the real serial
@@ -67,9 +67,9 @@ class TestSerialReader(unittest.TestCase):
         third_reader = serialreader.SerialReader(None, 9600, a, 200)
         third_reader.device = serial.serial_for_url("loop://", timeout=300)
 
-        first_reader.device.write(' \n\n[ \n  {"name":"bar","value":"777"} \n] \n')
-        second_reader.device.write(' \n\n[ \n  {"name":"foo","value":"666"} \n] \n')
-        first_reader.device.write(' \n\n[ \n  {"name":"foo","value":"888"} \n] \n')
+        first_reader.device.write(' \n\n[ \n  {"id":"bar","value":"777"} \n] \n')
+        second_reader.device.write(' \n\n[ \n  {"id":"foo","value":"666"} \n] \n')
+        first_reader.device.write(' \n\n[ \n  {"id":"foo","value":"888"} \n] \n')
         first_reader.start()
         second_reader.start()
         third_reader.start()

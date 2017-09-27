@@ -34,7 +34,7 @@ class DataStore(object):
 
         for v in j:
             v["time"] = self.last_data_timestamp
-            self.data[v["name"]] = v
+            self.data[v["id"]] = v
 
     def get_text(self):
         """

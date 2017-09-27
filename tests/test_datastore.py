@@ -11,7 +11,7 @@ class TestDataStore(unittest.TestCase):
         self.store = datastore.DataStore()
 
     def test_register_json(self):
-        j = '[ {"name":"light_value","value":"777"} ]'
+        j = '[ {"id":"light_value","value":"777"} ]'
         j_son = json.loads(j)
 
         self.store.register_json(j)
@@ -22,14 +22,14 @@ class TestDataStore(unittest.TestCase):
     def test_datetime(self):
         self.assertIs(self.store.last_data_timestamp, None)
 
-        j = '[ {"name":"light_value","value":"777"} ]'
+        j = '[ {"id":"light_value","value":"777"} ]'
         j_son = json.loads(j)
 
         self.store.register_json(j)
         self.assertIsNot(self.store.last_data_timestamp, None)
 
     def test_get_text(self):
-        j = '[ {"name":"a","value":"8","unit":"m"}, {"name":"b","value":"9"} ]'
+        j = '[ {"id":"a","value":"8","unit":"m"}, {"id":"b","value":"9"} ]'
         d = datetime.datetime.utcnow().replace(microsecond=0).isoformat()
         d = re.sub(":..$", ":XX", d)
         self.store.register_json(j)
@@ -49,7 +49,7 @@ class TestDataStore(unittest.TestCase):
         self.assertEqual(t2, r2)
 
     def test_get_json(self):
-        j = '[{"name":"foo","value":"777"}]'
+        j = '[{"id":"foo","value":"777"}]'
         self.store.register_json(j)
 
         j_son = json.loads(self.store.get_json())
@@ -63,7 +63,7 @@ class TestDataStore(unittest.TestCase):
         self.assertTrue(len(j0) < len(j1))
 
     def test_get_json_tuples(self):
-        j = '[ {"name":"foo","value":"777"} ]'
+        j = '[ {"id":"foo","value":"777"} ]'
         self.store.register_json(j)
 
         j0 = self.store.get_json()

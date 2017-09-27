@@ -1,4 +1,5 @@
 
+from base64 import b64encode
 import unittest2 as unittest
 import datetime
 import json
@@ -21,7 +22,7 @@ class TestDataReport(unittest.TestCase):
         pass
 
     def test_log_file(self):
-        self.store.register_json('[{"name":"foo"}]')
+        self.store.register_json('[{"id":"foo"}]')
 
         tf = tempfile.NamedTemporaryFile()
 
@@ -55,8 +56,20 @@ class TestDataReport(unittest.TestCase):
         self.reporter.register_credentials({"user":u,"password":p})
         self.assertEqual(self.reporter.credentials["user"], u)
         self.assertEqual(self.reporter.credentials["password"], p)
+        self.reporter.credentials = {}
+
+        self.reporter.register_credentials(None, u, None, p, None)
+        self.assertEqual(self.reporter.credentials["user"], u)
+        self.assertEqual(self.reporter.credentials["password"], p)
+        self.reporter.credentials = {}
 
         with open(tf.name, "w") as fh:
             fh.write("user: " + u + "\npassword: " + p + "\n")
 
+        self.reporter.register_credentials(None, None, tf.name, None, tf.name)
+        self.assertEqual(self.reporter.credentials["user"], u)
+        self.assertEqual(self.reporter.credentials["password"], p)
+
+        b = b64encode(u + ":" + p).decode("ascii")
+        self.assertEqual(self.reporter.credentials["base64"], b)
 
