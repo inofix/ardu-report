@@ -114,8 +114,12 @@ def standard_mode(args):
     """
     Helper function to run the reader for a certain amount of time
     """
-    store = datastore.DataStore()
-    reporter = datareporter.DataReporter(store, args.target, None, args.insecure)
+    if args.keyword_translation:
+        k = decode_keywords(args.keyword_translation)
+    else:
+        k = None
+    store = datastore.DataStore(k)
+    reporter = datareporter.DataReporter(store, args.output, None, args.insecure)
     if args.password:
         pw = getpass.getpass()
     else:
@@ -128,6 +132,17 @@ def standard_mode(args):
     reader.halt()
     reporter.log()
 
+def decode_keywords(keywordstring):
+    """
+    Helper function to read user input
+    """
+    ks = keywordstring.split(",")
+    if len(ks) < 2:
+        print "Please provide at least 2 comma separated keywords"
+        exit()
+    else:
+        return ks
+
 if __name__ == '__main__':
     """
     Main function used if started on the command line
@@ -137,11 +152,14 @@ if __name__ == '__main__':
     cli_parser.add_argument('-d', '--device', default='/dev/ttyACM0', help='serial device the arduino is connected to')
     cli_parser.add_argument('-i', '--interactive', action="store_true", help='prompt for control and log to stdout')
     cli_parser.add_argument('-I', '--insecure', default=False, action="store_true", help='do not verify certificate on HTTPS POST')
+    cli_parser.add_argument('-k', '--keyword_translation', help='list of comma separated keys to expect from the serial input line; mandatory are an ID and a value; default="id,value,unit,threshold"')
+    cli_parser.add_argument('-o', '--output', default="", help='output target, where to report the data to. Default is empty for <stdout>, the following URLs are provided yet: "file:///..", "http://..", "https://.."')
     cli_parser.add_argument('-p', '--password', action="store_true", help='prompt for a password')
     cli_parser.add_argument('-P', '--password_file', default='', help='load password from this file, containing the line: \'password: "my secret text"\'')
     cli_parser.add_argument('-r', '--rounds', type=int, default=0, help='how many times to run the serial listener thread (default: 0 / infinite)')
     cli_parser.add_argument('-s', '--seconds', type=int, default=10, help='how long to run if not in interacitve mode')
-    cli_parser.add_argument('-t', '--target', default="", help='target log, where to report the data to. Default is empty for <stdout>, the following URLs are provided yet: "file:///..", "http://..", "https://.."')
+#    cli_parser.add_argument('-t', '--translation-table-key', help='file containing separate lines with translation pairs for the keywords, e.g. "inkey: outkey"')
+#    cli_parser.add_argument('-T', '--translation-table-ids', help='file containing translation pairs for the content of the id-keyword, e.g. "sensor0: box_temp"')
     cli_parser.add_argument('-u', '--user', default='', help='user name')
     cli_parser.add_argument('-U', '--user_file', default='', help='load user name from this file, containing the line: \'user: "my_name"\'')
 

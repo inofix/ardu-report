@@ -42,6 +42,8 @@ class SerialReader(threading.Thread):
         """
         Open a connection over the serial line and receive data lines
         """
+        if not self.device:
+            return
         try:
             data = ""
             while (self.do_run):
