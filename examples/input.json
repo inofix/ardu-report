@@ -1,0 +1,13 @@
+[
+    {
+        "id": "water_distance",
+        "value": 0.23,
+        "unit": "m",
+        "threshold": 0.2
+    },
+    {
+        "id": "humidity",
+        "value": 60,
+        "unit": "%"
+    }
+]
