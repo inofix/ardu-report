@@ -17,6 +17,18 @@ On the other end there is a raspberry pi collecting the data. The data is then p
 
 If more than one arduino are connected. For each one of them the data processing can be configured individually.
 
+## Use it for Your Project?
+
+I am rewriting the input parser to accept any JSON schema following
+the meta schema to control the object index names. As it really only
+needs some sort of identifier and a value, there should not be too
+many obstacles to use it for your project too. See the 'schema'
+folder for details. The 'example' folder contains JSON file that
+validates against the schema and the tests/test\_json.py has
+a test run for both the input.json against the schema and the
+schema against the meta-schema..
+
+
 ## Example Data for Python Processing
 
 ### INPUT: JSON from the arduino over the serial line
@@ -31,7 +43,7 @@ If more than one arduino are connected. For each one of them the data processing
     {"id":"water_distance","unit":"m","value":"0.92"}
   ]
 
-### OUTPUT: Target JSON from the raspberry pi for the use in web app
+### OUTPUT: Target JSON from the raspberry pi for the use in e.g. a web app
 
   [
     {"id":"light_value","value":"777", "time"="2017-09-20T21:29:42"},
