@@ -3,7 +3,7 @@
 """
 PURPOSE:      read the serial output of one or more arduino boards
               and store the sensor values..
-DEPENDENCY:   python 2.7
+DEPENDENCY:   python 2.7, see requirements.txt
 PLATTFORM:    currently only unix/linux is supported
 AUTHOR(S):    michael lustenberger inofix.ch
 COPYRIGHT:    (C) 2017 by Michael Lustenberger and INOFIX GmbH

@@ -4,6 +4,12 @@
 
 Python library and CLI to report back the sensor data from our arduino(s).
 
+## Dependencies, Requirements
+
+ * Unix/Linux
+ * Python 2.7
+  * see requrements.txt
+
 ## Basic Idea
 
 For now we have one arduino reporting sensor values back over the serial line.
