@@ -35,16 +35,28 @@ extended-input.json that validates against an example
 customized schema (extended-input-schema.json), with itself
 still validates against the meta-schema.json.
 
+
 ## Example Data for Python Processing
 
 ### INPUT: JSON from the arduino over the serial line
 
-There are two examples under the 'examples' folder. The simple 'input.json'
-shows two measurements. The "id" and "value" entries in the object are
+There are two examples under the 'examples' folder.
+
+The simple 'input.json'
+shows two example measurements.
+The "id" and "value" entries in the object are
 mandatory. The "unit" and "threshold" are interpreted for the stdout
 log. Any other entry will just be passed on to the output (except for
-the sdtout log case). See the 'extended-input.json' for an example with
+the sdtout log case).
+
+Note that no timestamp joins the data. Most of the time there is no
+clock source available to the dump sensor controller. The timestamp
+is added in the output below though. If a timestamp is available
+in the input, it can still be passed on of course.
+
+See the 'extended-input.json' for an example with
 more enries and custom naming.
+
 
 ### OUTPUT: Target JSON from the raspberry pi for the use in e.g. a web app
 
