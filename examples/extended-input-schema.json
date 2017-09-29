@@ -1,8 +1,8 @@
 {
-    "$schema": "https://raw.githubusercontent.com/inofix/ardu-report/master/json/meta-schema.json",
-    "$id": "https://raw.githubusercontent.com/inofix/ardu-report/master/json/default-schema.json",
+    "$schema": "https://raw.githubusercontent.com/inofix/ardu-report/master/schemas/meta-schema.json",
+    "$id": "https://raw.githubusercontent.com/inofix/ardu-report/master/examples/extended-input-schema.json",
     "title": "Default Sensor Data Schema",
-    "description": "Definition of the inofix.ch arduino sensor data output JSON. (Customizations must only respect the use flag and may vary the property names. Please validate against this schema.)",
+    "description": "Custom extended input JSON.",
     "type": "array",
     "minItems": 1,
     "uniqueItems": true,
@@ -11,27 +11,27 @@
         "properties": {
             "ourVeryCustomSensorName": {
                 "type": "string",
-                "use": "identifier"
+                "key": "id"
             },
             "sensorValue": {
                 "type": "number",
-                "use": "value"
+                "key": "value"
             },
             "sensorValueUnit": {
                 "type": "string",
-                "use": "unit"
+                "key": "unit"
             },
             "criticalThreshold": {
                 "type": "number",
-                "use": "threshold"
+                "key": "threshold"
             },
             "warnThreshold": {
                 "type": "number",
-                "use": "other"
+                "key": "other"
             },
             "measurementTimestamp": {
                 "type": "string",
-                "use": "other"
+                "key": "other"
             }
         },
         "minProperties": 2,

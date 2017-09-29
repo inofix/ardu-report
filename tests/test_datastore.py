@@ -15,7 +15,17 @@ class TestDataStore(unittest.TestCase):
             m = fh.read()
         with open("./schemas/default-schema.json", "r") as fh:
             s = fh.read()
-        self.store.parse_schema(s, m)
+        with self.assertRaises(TypeError):
+            self.store.parse_schemas(s, None, None, None)
+        self.store.parse_schemas(s, m, None, None)
+        with open("./schemas/meta-schema.json", "r") as fh:
+            m = fh.read()
+        with open("./schemas/default-schema.json", "r") as fh:
+            s = fh.read()
+        with self.assertRaises(TypeError):
+            self.store.parse_schemas(None, None, s, None)
+        self.store.parse_schemas(None, None, s, m)
+        self.store.parse_schemas(s, m, s, m)
 
     def test_register_json(self):
         j = '[ {"id":"light_value","value":"777"} ]'
