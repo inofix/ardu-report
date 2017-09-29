@@ -49,17 +49,19 @@ class DataStore(object):
         }
         ## the rest to be set based on the schema files
         self.other_keys = {}
+        if in_schema and in_meta_schema:
+            self.parse_schema(in_schema, in_meta_schema)
 
-    def parse_schema(data, schema, meta_schema):
+    def parse_schema(self, schema, meta_schema):
         # load the two JSON schema objects
-        m = json.load(meta_schema)
-        s = json.load(schema)
+        m = json.loads(meta_schema)
+        s = json.loads(schema)
         # add some sanity argument before changing the config
         Validator(m).validate(s)
         # search for the keys
         for k in s["items"]["properties"]:
             v = s["items"]["properties"][k]
-            if v.has_key["use"]:
+            if v.has_key("use"):
                 if v["use"] == "identifier":
                     self.id_key = k
                 elif v["use"] == "value":
@@ -82,7 +84,6 @@ class DataStore(object):
         j = json.loads(data)
         self.last_data_timestamp = \
                 datetime.datetime.utcnow().replace(microsecond=0).isoformat()
-
         try:
             for v in j:
                 # prepare the sensor entry container

@@ -110,11 +110,21 @@ def interactive_mode(args):
                 print "Use one of 'rounds', 'register', 'unregister', "\
                       "'report', or 'exit' ..."
 
+def create_store(args):
+    if args.json_input_schema and args.meta_input_schema:
+        with open(args.json_input_schema, "r") as fh:
+            s = fh.read()
+        with open(args.meta_input_schema, "r") as fh:
+            m = fh.read()
+        return datastore.DataStore(s, m)
+    else:
+        return datastore.DataStore()
+
 def standard_mode(args):
     """
     Helper function to run the reader for a certain amount of time
     """
-    store = datastore.DataStore()
+    store = create_store(args)
     reporter = datareporter.DataReporter(store, args.output, None, args.insecure)
     if args.password:
         pw = getpass.getpass()

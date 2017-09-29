@@ -10,6 +10,13 @@ class TestDataStore(unittest.TestCase):
     def setUp(self):
         self.store = datastore.DataStore()
 
+    def test_parse_schema(self):
+        with open("./schemas/meta-schema.json", "r") as fh:
+            m = fh.read()
+        with open("./schemas/default-schema.json", "r") as fh:
+            s = fh.read()
+        self.store.parse_schema(s, m)
+
     def test_register_json(self):
         j = '[ {"id":"light_value","value":"777"} ]'
         j_son = json.loads(j)
