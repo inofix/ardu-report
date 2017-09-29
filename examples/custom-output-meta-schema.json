@@ -1,0 +1,73 @@
+{
+    "$id": "https://raw.githubusercontent.com/inofix/ardu-report/master/schemas/meta-schema.json",
+    "title": "Sensor Data Meta Schema",
+    "description": "Meta schema for all inofix.ch sensor data JSON-schemas. As there were different naming schemes used for different microcontroller implementations, we do not have a stable set on variable names used in the output. But we know that every useful sensor entry must at least have an identifier and a value. It might further have a field for the unit and/or a threshold and maybe a timestamp and other information.",
+    "type" : "object",
+    "properties": {
+        "title": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string",
+            "pattern": "^array$"
+        },
+        "minItems": {
+            "type": "integer"
+        },
+        "uniqueItems": {
+            "type": "boolean"
+        },
+        "items": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "pattern": "^object$"
+                },
+                "properties": {
+                    "type": "object",
+                    "patternProperties": {
+                        "^[a-zA-Z][a-zA-Z0-9_]+$": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string",
+                                    "oneOf": [
+                                        { "pattern": "^number$" },
+                                        { "pattern": "^string$" }
+                                    ]
+                                },
+                                "key": {
+                                    "type": "string",
+                                    "oneOf": [
+                                        { "pattern": "^id$" },
+                                        { "pattern": "^value$" },
+                                        { "pattern": "^unit$" },
+                                        { "pattern": "^threshold$" },
+                                        { "pattern": "^timestamp$" },
+                                        { "pattern": "^other$" }
+                                    ]
+                                }
+                            },
+                            "required": ["type", "key"]
+                        }
+                    }
+                },
+                "minProperties": {
+                    "type": "integer"
+                },
+                "required": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "one id, one value"
+                }
+            }
+        }
+    }
+}

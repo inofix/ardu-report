@@ -1,0 +1,40 @@
+{
+    "$schema": "https://raw.githubusercontent.com/inofix/ardu-report/master/schemas/meta-schema.json",
+    "$id": "https://raw.githubusercontent.com/inofix/ardu-report/master/examples/extended-input-schema.json",
+    "title": "Default Sensor Data Schema",
+    "description": "Custom extended input JSON.",
+    "type": "array",
+    "minItems": 1,
+    "uniqueItems": true,
+    "items": {
+        "type": "object",
+        "properties": {
+            "ourVeryCustomSensorName": {
+                "type": "string",
+                "key": "id"
+            },
+            "sensorValue": {
+                "type": "number",
+                "key": "value"
+            },
+            "sensorValueUnit": {
+                "type": "string",
+                "key": "unit"
+            },
+            "criticalThreshold": {
+                "type": "number",
+                "key": "threshold"
+            },
+            "warnThreshold": {
+                "type": "number",
+                "key": "other"
+            },
+            "measurementTimestamp": {
+                "type": "string",
+                "key": "other"
+            }
+        },
+        "minProperties": 2,
+        "required": ["ourVeryCustomSensorName", "sensorValue"]
+    }
+}

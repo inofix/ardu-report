@@ -113,12 +113,21 @@ def interactive_mode(args):
 def create_store(args):
     if args.json_input_schema and args.meta_input_schema:
         with open(args.json_input_schema, "r") as fh:
-            s = fh.read()
+            s_in = fh.read()
         with open(args.meta_input_schema, "r") as fh:
-            m = fh.read()
-        return datastore.DataStore(s, m)
+            m_in = fh.read()
     else:
-        return datastore.DataStore()
+        s_in = None
+        m_in = None
+    if args.json_output_schema and args.meta_output_schema:
+        with open(args.json_output_schema, "r") as fh:
+            s_out = fh.read()
+        with open(args.meta_output_schema, "r") as fh:
+            m_out = fh.read()
+    else:
+        s_out = None
+        m_out = None
+    return datastore.DataStore(s_in, m_in, s_out, m_out)
 
 def standard_mode(args):
     """

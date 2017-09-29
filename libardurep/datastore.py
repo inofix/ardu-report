@@ -51,16 +51,16 @@ class DataStore(object):
         ## special time keys
         ### report time
         self.time_key = self.time
-        ## the whole well known as an "input: output" map...
-        self.well_now_keys = {
+        ## the rest is to be added based on the schema files
+        self.other_keys = []
+        ## the translation "input: output" map...
+        self.translation_keys = {
             self.id_key: self.id_key,
             self.value_key: self.value_key,
             self.unit_key: self.unit_key,
             self.threshold_key: self.threshold_key,
             self.time_key: self.sensor_time_key
         }
-        ## the rest to be set based on the schema files
-        self.other_keys = {}
 
         # see whether to override the keywords on in- or output
         self.parse_schemas(in_schema, in_meta_schema, \
@@ -86,12 +86,12 @@ class DataStore(object):
                         self.unit_key = k
                     elif v[self.key] == self.threshold:
                         self.threshold_key = k
-                    elif v[self.key] == self.timestamp:
+                    elif v[self.key] == self.time:
                         if k == self.time_key:
                             self.time_key = self.fallback_time_key
                         self.sensor_time_key = k
                     elif v[self.key] == self.other:
-                        self.other_keys[k] = None
+                        self.other_keys.append(k)
                     # else: just throw it away..
         elif in_schema:
             raise TypeError('Received input schema but no meta schema..')
@@ -105,11 +105,7 @@ class DataStore(object):
                 v = s[self.items][self.properties][k]
                 if v.has_key(self.key):
                     t = v[self.key]
-                    if self.well_now_keys.has_key(t):
-                        self.well_now_keys[t] = k
-                    elif self.other_keys.has_key(t):
-                        self.other_keys[t] = k
-                    # else: just throw it away..
+                    self.translation_keys[t] = k
         elif out_schema:
             raise TypeError('Received input schema but no meta schema..')
 
@@ -179,24 +175,40 @@ class DataStore(object):
             t += "\n"
         return t
 
-    def get_json(self, prettyprint=False):
+    def get_translated_data(self):
+        """
+        Translate the data with the translation table
+        """
+        j = {}
+        for k in self.data:
+            d = {}
+            for l in self.data[k]:
+                d[self.translation_keys[l]] = self.data[k][l]
+            j[k] = d
+        return j
+
+    def get_json(self, prettyprint=False, translate=True):
         """
         Get the data in JSON form
         """
         j = []
-        for k in self.data:
-            j.append(self.data[k])
+        if translate:
+            d = self.get_translated_data()
+        else:
+            d = self.data
+        for k in d:
+            j.append(d[k])
         if prettyprint:
             j = json.dumps(j, indent=2, separators=(',',': '))
         else:
             j = json.dumps(j)
         return j
 
-    def get_json_tuples(self, prettyprint=False):
+    def get_json_tuples(self, prettyprint=False, translate=True):
         """
         Get the data as JSON tuples
         """
-        j = self.get_json(prettyprint)
+        j = self.get_json(prettyprint, translate)
         if len(j) > 2:
             if prettyprint:
                 j = j[1:-2] + ",\n"
