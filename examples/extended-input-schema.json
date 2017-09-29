@@ -1,0 +1,40 @@
+{
+    "$schema": "https://raw.githubusercontent.com/inofix/ardu-report/master/json/meta-schema.json",
+    "$id": "https://raw.githubusercontent.com/inofix/ardu-report/master/json/default-schema.json",
+    "title": "Default Sensor Data Schema",
+    "description": "Definition of the inofix.ch arduino sensor data output JSON. (Customizations must only respect the use flag and may vary the property names. Please validate against this schema.)",
+    "type": "array",
+    "minItems": 1,
+    "uniqueItems": true,
+    "items": {
+        "type": "object",
+        "properties": {
+            "ourVeryCustomSensorName": {
+                "type": "string",
+                "use": "identifier"
+            },
+            "sensorValue": {
+                "type": "number",
+                "use": "value"
+            },
+            "sensorValueUnit": {
+                "type": "string",
+                "use": "unit"
+            },
+            "criticalThreshold": {
+                "type": "number",
+                "use": "threshold"
+            },
+            "warnThreshold": {
+                "type": "number",
+                "use": "other"
+            },
+            "measurementTimestamp": {
+                "type": "string",
+                "use": "other"
+            }
+        },
+        "minProperties": 2,
+        "required": ["ourVeryCustomSensorName", "sensorValue"]
+    }
+}

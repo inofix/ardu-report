@@ -5,17 +5,32 @@ from jsonschema import Draft4Validator as Validator
 import os
 
 class TestJSON(unittest.TestCase):
-    def setUp(self):
-        with open("./schemas/meta-schema.json", "r") as fh:
-            self.meta_schema = json.loads(fh.read())
-        with open("./schemas/default-schema.json", "r") as fh:
-            self.schema = json.loads(fh.read())
-        with open("./examples/input.json") as fh:
-            self.example = json.loads(fh.read())
-
     def test_schema(self):
-        Validator(self.meta_schema).validate(self.schema)
+        with open("./schemas/meta-schema.json", "r") as fh:
+            meta_schema = json.loads(fh.read())
+        with open("./schemas/default-schema.json", "r") as fh:
+            schema = json.loads(fh.read())
+        Validator(meta_schema).validate(schema)
 
     def test_example(self):
-        Validator(self.schema).validate(self.example)
+        with open("./schemas/default-schema.json", "r") as fh:
+            schema = json.loads(fh.read())
+        with open("./examples/input.json") as fh:
+            example = json.loads(fh.read())
+        Validator(schema).validate(example)
+
+    def test_extended_schema(self):
+        with open("./schemas/meta-schema.json", "r") as fh:
+            meta_schema = json.loads(fh.read())
+        with open("./examples/extended-input-schema.json", "r") as fh:
+            schema = json.loads(fh.read())
+        Validator(meta_schema).validate(schema)
+
+    def test_extended_example(self):
+        with open("./examples/extended-input-schema.json", "r") as fh:
+            schema = json.loads(fh.read())
+        with open("./examples/extended-input.json") as fh:
+            example = json.loads(fh.read())
+        Validator(schema).validate(example)
+
 

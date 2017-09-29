@@ -1,0 +1,16 @@
+[
+   {
+        "ourVeryCustomSensorName": "water_distance",
+        "sensorValue": 0.23,
+        "sensorUnit": "m",
+        "criticalThreshold": 0.2,
+        "warnThreshold": 0.25,
+        "measurementTimestamp": "00:40:47"
+    },
+    {
+        "ourVeryCustomSensorName": "humidity",
+        "sensorValue": 60,
+        "sensorUnit": "%",
+        "measurementTimestamp": "00:40:48"
+    }
+]
