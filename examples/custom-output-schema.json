@@ -1,6 +1,6 @@
 {
-    "$schema": "https://raw.githubusercontent.com/inofix/ardu-report/master/schemas/meta-schema.json",
-    "$id": "https://raw.githubusercontent.com/inofix/ardu-report/master/examples/extended-input-schema.json",
+    "$schema": "https://raw.githubusercontent.com/inofix/ardu-report/master/examples/custom-output-meta-schema.json",
+    "$id": "https://raw.githubusercontent.com/inofix/ardu-report/master/examples/custom-output-schema.json",
     "title": "Default Sensor Data Schema",
     "description": "Custom extended input JSON.",
     "type": "array",

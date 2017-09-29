@@ -60,15 +60,16 @@ more enries and custom naming.
 
 ### OUTPUT: Target JSON from the raspberry pi for the use in e.g. a web app
 
-  [
-    {"id":"light_value","value":"777", "time"="2017-09-20T21:29:42"},
-    {"id":"light_value","value":"777", "time"="2017-09-20T21:39:51"},
-    {"id":"light_value","value":"777", "time"="2017-09-20T21:49:49"},
-    {"id":"box_temperature","unit":"°C","value":"22.19", "time"="2017-09-20T21:49:49"},
-    {"id":"env_temperature","unit":"°C","value":"20.00", "time"="2017-09-20T21:49:49"},
-    {"id":"env_humidity","unit":"%","value":"71.00", "time"="2017-09-20T21:49:49"},
-    {"id":"env_heat_index","value":"19.91", "time"="2017-09-20T21:49:49"},
-    {"id":"water_level","threshold":"600","value":"0", "time"="2017-09-20T21:49:49"},
-    {"id":"water_distance","unit":"m","value":"0.92", "time"="2017-09-20T21:49:49"}
-  ]
+Based on the URL specified, the data is appended to a file ("file://") as
+a continuing list of JSON objects containing sensor value entries or
+sent as a complete JSON array to a web server ("http://" / "https://")
+as a POST request. If the URL string is empty, the data is just printed in
+text form to stdout.
+
+Example JSON output can be found under the examples folder:
+
+ * output.json - default
+ * custom-output.json - if an output JSON scheme is defined, the entries
+   can be translated. The output JSON must validate against the meta
+   schema..
 

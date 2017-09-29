@@ -59,7 +59,7 @@ class DataStore(object):
             self.value_key: self.value_key,
             self.unit_key: self.unit_key,
             self.threshold_key: self.threshold_key,
-            self.time_key: self.sensor_time_key
+            self.time_key: self.time_key
         }
 
         # see whether to override the keywords on in- or output

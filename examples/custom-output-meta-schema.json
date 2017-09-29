@@ -1,7 +1,7 @@
 {
-    "$id": "https://raw.githubusercontent.com/inofix/ardu-report/master/schemas/meta-schema.json",
-    "title": "Sensor Data Meta Schema",
-    "description": "Meta schema for all inofix.ch sensor data JSON-schemas. As there were different naming schemes used for different microcontroller implementations, we do not have a stable set on variable names used in the output. But we know that every useful sensor entry must at least have an identifier and a value. It might further have a field for the unit and/or a threshold and maybe a timestamp and other information.",
+    "$id": "https://raw.githubusercontent.com/inofix/ardu-report/master/examples/custom-output-meta-schema.json",
+    "title": "Customized Sensor Data Meta Schema",
+    "description": "Meta schema to show how translation works.",
     "type" : "object",
     "properties": {
         "title": {
