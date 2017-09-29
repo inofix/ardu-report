@@ -35,7 +35,7 @@ class TestDataStore(unittest.TestCase):
         self.store.register_json(j)
 
         t0 = "==== " + d + " ===="
-        t1 = "a 8 m"
+        t1 = "a 8m"
         t2 = "b 9"
 
         result = self.store.get_text()

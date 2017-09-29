@@ -47,6 +47,7 @@
                                         { "pattern": "^value$" },
                                         { "pattern": "^unit$" },
                                         { "pattern": "^threshold$" },
+                                        { "pattern": "^timestamp$" },
                                         { "pattern": "^other$" }
                                     ]
                                 }

@@ -152,6 +152,13 @@ if __name__ == '__main__':
 
     args = p.parse_args()
 
+    if args.json_input_schema and not args.meta_input_schema:
+        print "If a 'json_input_schema' is provided, the 'meta_input_schema' is required."
+        exit()
+    if args.json_output_schema and not args.meta_output_schema:
+        print "If a 'json_output_schema' is provided, the 'meta_output_schema' is required."
+        exit()
+
     if args.interactive:
         interactive_mode(args)
     else:
