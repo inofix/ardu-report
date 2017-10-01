@@ -1,0 +1,42 @@
+[
+  {
+    "sensorValueUnit": "\u00b0C",
+    "time": "2017-09-29T22:17:34",
+    "ourVeryCustomSensorName": "box_temperature",
+    "sensorValue": 23.31
+  },
+  {
+    "time": "2017-09-29T22:17:34",
+    "ourVeryCustomSensorName": "light_value",
+    "sensorValue": 964
+  },
+  {
+    "sensorValueUnit": "\u00b0C",
+    "time": "2017-09-29T22:17:34",
+    "ourVeryCustomSensorName": "env_temperature",
+    "sensorValue": 21.0
+  },
+  {
+    "time": "2017-09-29T22:17:34",
+    "ourVeryCustomSensorName": "water_level",
+    "criticalThreshold": 600,
+    "sensorValue": 0
+  },
+  {
+    "sensorValueUnit": "%",
+    "time": "2017-09-29T22:17:34",
+    "ourVeryCustomSensorName": "env_humidity",
+    "sensorValue": 65.0
+  },
+  {
+    "time": "2017-09-29T22:17:34",
+    "ourVeryCustomSensorName": "env_heat_index",
+    "sensorValue": 20.85
+  },
+  {
+    "sensorValueUnit": "m",
+    "time": "2017-09-29T22:17:34",
+    "ourVeryCustomSensorName": "water_distance",
+    "sensorValue": 0.03
+  }
+]

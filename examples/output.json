@@ -1,0 +1,26 @@
+[
+  {
+    "unit": "\u00b0C",
+    "id": "box_temperature",
+    "value": 23.31,
+    "time": "2017-09-29T21:32:33"
+  },
+  {
+    "id": "light_value",
+    "value": 965,
+    "time": "2017-09-29T21:32:33"
+  },
+  {
+    "unit": "\u00b0C",
+    "id": "env_temperature",
+    "value": 21.0,
+    "time": "2017-09-29T21:32:33"
+  },
+  {
+    "threshold": 600,
+    "id": "water_level",
+    "value": 0,
+    "time": "2017-09-29T21:32:33"
+  }
+]
+
