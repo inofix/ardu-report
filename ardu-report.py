@@ -134,7 +134,7 @@ def standard_mode(args):
     Helper function to run the reader for a certain amount of time
     """
     store = create_store(args)
-    reporter = datareporter.DataReporter(store, args.output, None, args.insecure)
+    reporter = datareporter.DataReporter(store, args.output, None, not args.insecure)
     if args.password:
         pw = getpass.getpass()
     else:

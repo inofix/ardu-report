@@ -31,7 +31,7 @@ class DataReporter(object):
         self.credentials = credentials
         self.do_verify_certificate = do_verify_certificate
 
-    def log(self, url=None, credentials=None, do_verify_certificate=None):
+    def log(self, url=None, credentials=None, do_verify_certificate=True):
         """
         Wrapper for the other log methods, decide which one based on the
         URL parameter.
@@ -65,7 +65,7 @@ class DataReporter(object):
             print e
             print "Could not write the content to the file.."
 
-    def log_post(self, url=None, credentials=None, do_verify_certificate=None):
+    def log_post(self, url=None, credentials=None, do_verify_certificate=True):
         """
         Write to a remote host via HTTP POST
         """
