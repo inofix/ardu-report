@@ -7,9 +7,10 @@
 # Intended Usage:
 # * Tag your git repo with e.g. `git tag -a 0.1`
 # * Copy this script to your .git/hooks/ (and mark it executable..)
-# * Any time you want to manually set a version, commit all changes,
-#   set the version in $version_file/$setup_file, tag the repo again
-#   and commit the change of the version
+# * Any time you want to manually set a version (release), commit all changes,
+#   set the version in $version_file/$setup_file, tag repo to the release
+#   (do not push it, we will re-tag again later) and commit the change of
+#   the version, then tag again with '-f' and push everything
 # If someone has a simpler, yet equally powerful, idea, please send it to
 # me (mic at inofix.ch).
 
