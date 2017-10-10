@@ -1,23 +1,32 @@
-# ardu-report
+ardu-report
+===========
 
-[![Travis CI](https://img.shields.io/travis/zwischenloesung/ardu-report.svg?style=flat)](http://travis-ci.org/zwischenloesung/ardu-report)
+.. image:: https://travis-ci.org/zwischenloesung/ardu-report.svg?branch=master
+       :target: https://travis-ci.org/zwischenloesung/ardu-report
 
 Python library and CLI to report back the sensor data from our arduino(s).
 
-## Dependencies, Requirements
+Dependencies, Requirements
+--------------------------
 
  * Unix/Linux
- * Python 2.7
-  * see requrements.txt
 
-## Basic Idea
+ * Python 2/3
+
+  - tested against: 2.7 and 3.5
+
+  - see requrements.txt for further dependencies
+
+Basic Idea
+----------
 
 For now we have one arduino reporting sensor values back over the serial line.
 On the other end there is a raspberry pi collecting the data. The data is then processed and either just printed to the console or a file, or sent over mobile or wired/wireless network to, e.g., a webserver..
 
 If more than one arduino are connected. For each one of them the data processing can be configured individually.
 
-## Use it for Your Project?
+Use it for Your Project?
+------------------------
 
 I am rewriting the input parser to accept any JSON schema following
 the meta schema to control the object index names. As it really only
@@ -36,9 +45,11 @@ customized schema (extended-input-schema.json), with itself
 still validates against the meta-schema.json.
 
 
-## Example Data for Python Processing
+Example Data for Python Processing
+----------------------------------
 
-### INPUT: JSON from the arduino over the serial line
+INPUT: JSON from the arduino over the serial line
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There are two examples under the 'examples' folder.
 
@@ -58,7 +69,8 @@ See the 'extended-input.json' for an example with
 more enries and custom naming.
 
 
-### OUTPUT: Target JSON from the raspberry pi for the use in e.g. a web app
+OUTPUT: Target JSON from the raspberry pi for the use in e.g. a web app
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Based on the URL specified, the data is appended to a file ("file://") as
 a continuing list of JSON objects containing sensor value entries or
@@ -69,7 +81,8 @@ text form to stdout.
 Example JSON output can be found under the examples folder:
 
  * output.json - default
- * custom-output.json - if an output JSON scheme is defined, the entries
-   can be translated. The output JSON must validate against the meta
-   schema..
+
+ * custom-output.json - if an output JSON scheme is defined, the
+   entries can be translated. The output JSON must validate against
+   the meta schema..
 

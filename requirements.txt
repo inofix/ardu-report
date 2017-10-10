@@ -1,5 +1,3 @@
+ardu-report-lib
 ConfigArgParse
-jsonschema
-pyserial
-requests
 unittest2

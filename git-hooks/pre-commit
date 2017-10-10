@@ -1,0 +1,60 @@
+#!/bin/sh
+# Licensed under the "Fair License (Fair)" (2015, Fair License: http://fairlicense.org/) (or any other fucking license that is equivalent...)
+# (C) 2017 Michael Lustenberger (mic at inofix.ch)
+# Usage of the works is permitted provided that this instrument is retained with the works, so that any entity that uses the works is notified of this instrument.
+# DISCLAIMER: THE WORKS ARE WITHOUT WARRANTY.
+#
+# Intended Usage:
+# * Tag your git repo with e.g. `git tag -a 0.1`
+# * Copy this script to your .git/hooks/ (and mark it executable..)
+# * Any time you want to manually set a version, commit all changes,
+#   set the version in $version_file/$setup_file, tag the repo again
+#   and commit the change of the version
+# If someone has a simpler, yet equally powerful, idea, please send it to
+# me (mic at inofix.ch).
+
+# always find the version here..
+version_file=version.txt
+# send a copy to PyPI setup.py
+setup_file=setup.py
+
+if ! git describe >/dev/null 2>&1 ; then
+    echo "This project has no version info yet! Use 'git tag -a <version>' to start versioning.."
+    exit 1
+fi
+
+if ! git diff --quiet HEAD ; then
+    # something has changed in the repository
+    if git diff --quiet ; then
+        # this means the changes were actually added
+
+        new_version=`git describe`
+        old_version=`grep "^Git Version: .*$" $version_file | awk '{print $3}'`
+
+        if [ "$new_version" != "$old_version" ] ; then
+            # do nothing if a version was tagged manually
+
+            # convert the git version to a PEP440 compliant form
+            i=0
+            for v in `echo $new_version | tr "-" " "` ; do
+                eval "v_$i=$v"
+                i=$(($i+1))
+            done
+
+            pypi_version="$v_0"
+            if [ -n "$v_1" ] && [ -n "$v_2" ] ; then
+                pypi_version="$v_0.dev$v_1+$v_2"
+            fi
+
+            # set it into version.txt and setup.py
+            echo "Something has changed, count up the version to $new_version ($pypi_version resp.)"
+
+            sed -i 's;^Git Version: .*$;Git Version: '${new_version}';' $version_file
+            sed -i 's;^PyPI Version: .*$;PyPI Version: '${pypi_version}';' $version_file
+            git add $version_file
+            sed -i "s;    version='.*',;    version='${pypi_version}',;" $setup_file
+            git add $setup_file
+        fi
+    fi
+fi
+
