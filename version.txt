@@ -1,2 +1,2 @@
-Real Version: 0.9-4-g41c9551
-Official Version: 0.9.dev4
+Internal Version: 1.0.0
+Official Version: 1.0.0

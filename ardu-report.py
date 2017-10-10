@@ -58,7 +58,7 @@ def interactive_mode(args):
             sys.stdout.flush()
 
             # get user input
-            m = os.read(0,80)[:-1]
+            m = os.read(0,80)[:-1].decode("UTF-8")
 
             # prepare the modes
             ms = m.split(" ")

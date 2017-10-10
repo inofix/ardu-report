@@ -29,7 +29,7 @@ if ! git diff --quiet HEAD ; then
         # this means the changes were actually added
 
         new_version=`git describe`
-        old_version=`grep "^Git Version: .*$" $version_file | awk '{print $3}'`
+        old_version=`grep "^Internal Version: .*$" $version_file | awk '{print $3}'`
 
         if [ "$new_version" != "$old_version" ] ; then
             # do nothing if a version was tagged manually
@@ -49,8 +49,8 @@ if ! git diff --quiet HEAD ; then
             # set it into version.txt and setup.py
             echo "Something has changed, count up the version to $new_version ($pypi_version resp.)"
 
-            sed -i 's;^Git Version: .*$;Git Version: '${new_version}';' $version_file
-            sed -i 's;^PyPI Version: .*$;PyPI Version: '${pypi_version}';' $version_file
+            sed -i 's;^Internal Version: .*$;Internal Version: '${new_version}';' $version_file
+            sed -i 's;^Official Version: .*$;Official Version: '${pypi_version}';' $version_file
             git add $version_file
             sed -i "s;    version='.*',;    version='${pypi_version}',;" $setup_file
             git add $setup_file

@@ -1,10 +1,12 @@
 ardu-report
 ===========
 
-.. image:: https://travis-ci.org/zwischenloesung/ardu-report.svg?branch=master
+.. .. image:: https://travis-ci.org/zwischenloesung/ardu-report.svg?branch=master
        :target: https://travis-ci.org/zwischenloesung/ardu-report
 
-Python library and CLI to report back the sensor data from our arduino(s).
+Python CLI to report back the sensor data from our arduino(s). See
+(https://pypi.org/project/ardu-report-lib/ / https://github.com/inofix/ardu-report-lib)
+for the main library.
 
 Dependencies, Requirements
 --------------------------
@@ -13,7 +15,9 @@ Dependencies, Requirements
 
  * Python 2/3
 
-  - tested against: 2.7 and 3.5
+  - tested against: 2.7 and 3.5 (main lib has unittests and Travis-CI)
+
+  - this is just a frontend for 'ardu-report-lib' (main dependency)
 
   - see requrements.txt for further dependencies
 
